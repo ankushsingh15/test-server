@@ -1,0 +1,24 @@
+name: Update admin-master branch
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  update-admin-master-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v2
+        with:
+          ref: main
+      - name: Checkout admin-master branch
+        run: git checkout admin-master
+      - name: Merge changes from main branch
+        run: git merge main
+      - name: Push changes to admin-master branch
+        run: git push origin admin-master
